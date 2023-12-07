@@ -1,23 +1,34 @@
 let s:asciiart = [
-			   \"                          ",
-			   \"       %%%,%%%%%%%        ",
-			   \"       ,'%% \\-*%%%%%%%   ",
-			   \";%%%%%*%   _%%%%\"        ",
-			   \"  ,%%%       \\(_.*%%%%.  ",
-			   \"  % *%%, ,%%%%*(    '     ",
-			   \" %^     ,*%%% )\\|,%%*%,_ ",
-			   \"      *%    \/ #).-\"%%*  ",
-			   \"          _.) ,/ *%,      ",
-			   \" __________/)#(___________",
-			   \" Made by Oussama Ezzaou :)",
+			   \"            ################",
+			   \"          ####################",
+			   \"        ########################",
+			   \"       #############+########### #",
+			   \"       ######-..        .+########",
+			   \"       ####-..            ..+#### ",
+			   \"       ###-...             .-####",
+			   \"       ###...              ..+##",
+			   \"        #-.++###.      -###+..##",
+			   \"        #....  ...   .-.  ....##",
+			   \"     --.#.-#+## -..  -+ ##-#-.-...",
+			   \"      ---....... ..  ........... -",
+			   \"      -+#..     ..   .       .+-.",
+			   \"       .--.     .     .     ..+.",
+			   \"         -..    .+--.-.     ...",
+			   \"         +.... .-+#.#+.    ..-",
+			   \"          +...#####-++###-..-",
+			   \"          #---..----+--.---+##",
+			   \"        ###-+--.... ....--+#####",
+			   \"  ##########--#-.......-#-###########",
 			   \]
+
+
 			
 
 
 let s:start		= '//'
 let s:end		= ''
 let s:fill		= ''
-let s:length	= 80
+let s:length	= 90
 let s:margin	= 5
 
 let s:types		= {
@@ -67,16 +78,20 @@ function! s:textline(left, right)
 endfunction
 
 function! s:line(n)
-	if a:n == 1 || a:n == 2 || a:n == 3  || a:n == 4 || a:n == 6 || a:n == 8 || a:n == 11
-		return s:textline('', s:ascii(a:n))
+	if a:n == 1 || a:n == 2 || a:n == 3  || a:n == 4 || a:n == 6 || a:n == 7 || a:n == 9 || a:n == 12
+		return s:textline(s:ascii(a:n), '')
+	elseif a:n == 13 || a:n == 14 || a:n == 15 || a:n == 16 || a:n == 17 || a:n == 18 || a:n == 19
+		return s:textline(s:ascii(a:n), '')
+	elseif a:n == 20
+		return s:textline(s:ascii(a:n), "Made By Oussama Ezzaou (OEZZAOU) :)")
 	elseif a:n == 5 " filename
-		return s:textline(s:filename(), s:ascii(a:n))
-	elseif a:n == 7 " author
-		return s:textline("By: " . s:user() . " <" . s:mail() . ">", s:ascii(a:n))
-	elseif a:n == 9 " created
-		return s:textline("Created: " . s:date() . " by " . s:user(), s:ascii(a:n))
-	elseif a:n == 10 " updated
-		return s:textline("Updated: " . s:date() . " by " . s:user(), s:ascii(a:n))
+		return s:textline(s:ascii(a:n), "< " . s:filename() . " >" . "                               ")
+	elseif a:n == 8 " author
+		return s:textline(s:ascii(a:n), "Student: " . s:user() . " <" . s:mail() . ">")
+	elseif a:n == 10 " created
+		return s:textline(s:ascii(a:n), "Created: " . s:date() . " by " . s:user())
+	elseif a:n == 11 " updated
+		return s:textline(s:ascii(a:n), "Updated: " . s:date() . " by " . s:user(),)
 	endif
 endfunction
 
@@ -115,7 +130,7 @@ function! s:date()
 endfunction
 
 function! s:insert()
-	let l:line = 11
+	let l:line = 20
 
 	" empty line after header
 	call append(0, "")
@@ -129,11 +144,11 @@ endfunction
 
 function! s:update()
 	call s:filetype()
-	if getline(10) =~ s:start . repeat(' ', s:margin - strlen(s:start)) . "Updated: "
+	if getline(11) =~ s:start . '\s*' . '.*Updated: '
 		if &mod
-			call setline(9, s:line(9))
+			call setline(10, s:line(10))
 		endif
-		call setline(10, s:line(10))
+		call setline(11, s:line(11))
 		return 0
 	endif
 	return 1
@@ -143,9 +158,6 @@ function! s:Mheader()
 	if s:update()
 		call s:insert()
 	endif
-endfunction
-
-function! s:not()
 endfunction
 
 " Bind command and shortcut
