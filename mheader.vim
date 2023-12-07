@@ -83,9 +83,9 @@ function! s:line(n)
 	elseif a:n == 13 || a:n == 14 || a:n == 15 || a:n == 16 || a:n == 17 || a:n == 18 || a:n == 19
 		return s:textline(s:ascii(a:n), '')
 	elseif a:n == 20
-		return s:textline(s:ascii(a:n), "Made By Oussama Ezzaou (OEZZAOU) :)")
+		return s:textline(s:ascii(a:n), "Made By Oussama Ezzaou <OEZZAOU> :)")
 	elseif a:n == 5 " filename
-		return s:textline(s:ascii(a:n), "< " . s:filename() . " >" . "                               ")
+		return s:textline(s:ascii(a:n), "< " . s:filename() . " >" . "                        ")
 	elseif a:n == 8 " author
 		return s:textline(s:ascii(a:n), "Student: " . s:user() . " <" . s:mail() . ">")
 	elseif a:n == 10 " created
