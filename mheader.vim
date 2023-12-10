@@ -28,12 +28,12 @@ let s:asciiart = [
 let s:start		= '//'
 let s:end		= ''
 let s:fill		= ''
-let s:length	= 90
-let s:margin	= 5
+let s:length	= 80
+let s:margin	= 1
 
 let s:types		= {
-			\'\.c$\|\.h$\|\.cc$\|\.hh$\|\.cpp$\|\.hpp$\|\.php':
-			\['//', '', ' '],
+			\'\.c$\|\.h$\|\.cc$\|\.hh$\|\.cpp$\|\.hpp$\|\.php$\|\.tpp':
+			\['//', '', ''],
 			\'\.htm$\|\.html$\|\.xml$':
 			\['<!--', '-->', '*'],
 			\'\.js$':
@@ -53,9 +53,9 @@ let s:types		= {
 function! s:filetype()
 	let l:f = s:filename()
 
-	let s:start	= '#'
-	let s:end	= ' '
-	let s:fill	= ' '
+	let s:start	= '# '
+	let s:end	= ''
+	let s:fill	= ''
 
 	for type in keys(s:types)
 		if l:f =~ type
@@ -74,7 +74,7 @@ endfunction
 function! s:textline(left, right)
 	let l:left = strpart(a:left, 0, s:length - s:margin * 2 - strlen(a:right))
 
-	return s:start . repeat(' ', s:margin - strlen(s:start)) . l:left . repeat(' ', s:length - s:margin * 2 - strlen(l:left) - strlen(a:right)) . a:right . repeat(' ', s:margin - strlen(s:end)) . s:end
+	return s:start . repeat(' ', s:margin - strlen(s:start)) . l:left . repeat(' ', s:length - s:margin * 2 - strlen(l:left) - strlen(a:right)) . a:right . s:end
 endfunction
 
 function! s:line(n)
