@@ -22,9 +22,6 @@ let s:asciiart = [
 			   \]
 
 
-			
-
-
 let s:start		= '//'
 let s:end		= ''
 let s:fill		= ''
@@ -91,7 +88,7 @@ function! s:line(n)
 	elseif a:n == 10 " created
 		return s:textline(s:ascii(a:n), "Created: " . s:date() . " by " . s:user())
 	elseif a:n == 11 " updated
-		return s:textline(s:ascii(a:n), "Updated: " . s:date() . " by " . s:user(),)
+		return s:textline(s:ascii(a:n), "Updated: " . s:date() . " by " . s:user())
 	endif
 endfunction
 
@@ -145,9 +142,6 @@ endfunction
 function! s:update()
 	call s:filetype()
 	if getline(11) =~ s:start . '\s*' . '.*Updated: '
-		if &mod
-			call setline(10, s:line(10))
-		endif
 		call setline(11, s:line(11))
 		return 0
 	endif
@@ -163,4 +157,4 @@ endfunction
 " Bind command and shortcut
 command! Mheader call s:Mheader ()
 map <F1> :Mheader<CR>
-autocmd BufWritePre * call s:update ()
+autocmd BufWritePre * call s:Mheader ()
