@@ -1,22 +1,8 @@
-"  ⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣤⣦⣴⣶⣾⣿⣶⣶⣶⣶⣦⣤⣄⠀⠀⠀⠀⠀⠀⠀                                              "
-"  ⠀⠀⠀⠀⠀⠀⠀⢠⡶⠻⠛⠟⠋⠉⠀⠈⠤⠴⠶⠶⢾⣿⣿⣿⣷⣦⠄⠀⠀⠀             𓐓  mheader.vim 𓐔           "
-"  ⠀⠀⠀⠀⠀⢀⠔⠋⠀⠀⠤⠒⠒⢲⠀⠀⠀⢀⣠⣤⣤⣬⣽⣿⣿⣿⣷⣄⠀⠀                                              "
-"  ⠀⠀⠀⣀⣎⢤⣶⣾⠅⠀⠀⢀⡤⠏⠀⠀⠀⠠⣄⣈⡙⠻⢿⣿⣿⣿⣿⣿⣦⠀                                              "
-"  ⢀⠔⠉⠀⠊⠿⠿⣿⠂⠠⠢⣤⠤⣤⣼⣿⣶⣶⣤⣝⣻⣷⣦⣍⡻⣿⣿⣿⣿⡀   Student: oezzaou <oezzaou@student.1337.ma> "
-"  ⢾⣾⣆⣤⣤⣄⡀⠀⠀⠀⠀⠀⠀⠀⠉⢻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇                                              "
-"  ⠀⠈⢋⢹⠋⠉⠙⢦⠀⠀⠀⠀⠀⠀⢀⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇                                              "
-"  ⠀⠀⠀⠑⠀⠀⠀⠈⡇⠀⠀⠀⠀⣠⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠇       Created: 2024/06/05 00:52:09 by oezzaou"
-"  ⠀⠀⠀⠀⠀⠀⠀⠀⡇⠀⠀⢀⣾⣿⣿⠿⠟⠛⠋⠛⢿⣿⣿⠻⣿⣿⣿⣿⡿⠀       Updated: 2024/06/05 00:55:49 by oezzaou"
-"  ⠀⠀⠀⠀⠀⠀⠀⢀⠇⠀⢠⣿⣟⣭⣤⣶⣦⣄⡀⠀⠀⠈⠻⠀⠘⣿⣿⣿⠇⠀                                              "
-"  ⠀⠀⠀⠀⠀⠱⠤⠊⠀⢀⣿⡿⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⠀⠀⠀⠘⣿⠏⠀⠀                                              "
-"  ⠀⠀⠀⠀⠀⡄⠀⠀⠀⠘⢧⡀⠀⠀⠸⣿⣿⣿⠟⠀⠀⠀⠀⠀⠀⠐⠋⠀⠀⠀                                              "
-"  ⠀⠀⠀⠀⠀⠘⠄⣀⡀⠸⠓⠀⠀⠀⠠⠟⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀                     𓄂 oussama Ezzaou𓆃  "
-
 "let s:asciiart = [
 "			   \"            ################",
 "			   \"          ####################",
 "			   \"        ########################",
-"			   \"       #############+########### #",
+"			   \"       #############+########### #,
 "			   \"       ######-..        .+########",
 "			   \"       ####-..            ..+#### ",
 "			   \"       ###-...             .-####",
@@ -79,7 +65,7 @@ let s:types		= {
 function! s:filetype()
 	let l:f = s:filename()
 
-	let s:start	= '# '
+	let s:start	= '#'
 	let s:end	= ''
 	let s:fill	= ''
 
@@ -104,18 +90,26 @@ function! s:textline(left, right)
 endfunction
 
 function! s:line(n)
-	if a:n == 1 || a:n == 3  || a:n == 4 || a:n == 6 || a:n == 7 || a:n == 10 || a:n == 11 || a:n == 12
+	if a:n == 1
 		return s:textline(s:ascii(a:n), '')
-	elseif a:n == 13
-		return s:textline(s:ascii(a:n), "𓄂 oussama Ezzaou𓆃  ")
 	elseif a:n == 2 " filename
 		return s:textline(s:ascii(a:n), "𓐓  " . s:filename() . " 𓐔 " . "          ")
-	elseif a:n == 5 " author
+	elseif a:n == 3 
+		return s:textline(s:ascii(a:n), '')
+	elseif a:n == 4 " author
 		return s:textline(s:ascii(a:n), "Student: " . s:user() . " <" . s:mail() . "> ")
-	elseif a:n == 8 " created
+	elseif a:n == 5 || a:n == 6
+		return s:textline(s:ascii(a:n), '')
+	elseif a:n == 7 " created
 		return s:textline(s:ascii(a:n), "Created: " . s:date() . " by " . s:user())
-	elseif a:n == 9 " updated
+	elseif a:n == 8 " updated
 		return s:textline(s:ascii(a:n), "Updated: " . s:date() . " by " . s:user())
+	elseif a:n == 9 || a:n == 10 || a:n == 13
+		return s:textline(s:ascii(a:n), '')
+	elseif a:n == 11
+		return s:textline(s:ascii(a:n), '𓆩♕𓆪      ')
+	elseif a:n == 12
+		return s:textline(s:ascii(a:n), "𓄂 oussama ezzaou𓆃  ")
 	endif
 endfunction
 
@@ -168,15 +162,16 @@ endfunction
 
 function! s:update()
 	call s:filetype()
-	if getline(9) =~ s:start . '\s*' . '.*Updated: '
-		call setline(9, s:line(9))
+	if getline(8) =~ s:start . '\s*' . '.*Updated: '
+		call setline(8, s:line(8))
+		call setline(2, s:line(2))
 		return 0
 	endif
 	return 1
 endfunction
 
 function! s:Mheader()
-	if s:update()
+	if s:update ()
 		call s:insert()
 	endif
 endfunction
@@ -184,4 +179,4 @@ endfunction
 " Bind command and shortcut
 command! Mheader call s:Mheader ()
 map <F1> :Mheader<CR>
-autocmd BufWritePre * call s:Mheader ()
+autocmd BufWritePre * call s:update ()
