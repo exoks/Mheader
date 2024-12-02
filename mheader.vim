@@ -48,6 +48,8 @@ let s:types		= {
 			\['//', '', ''],
 			\'\.htm$\|\.html$\|\.xml$':
 			\['<!--', '-->', '*'],
+      \'\.lua$':
+      \['--', '--', ''],
 			\'\.js$':
 			\['//', '', ''],
 			\'\.tex$':
@@ -176,7 +178,7 @@ function! s:Mheader()
 	endif
 endfunction
 
-" Bind command and shortcut
+" Bind command & shortcut
 command! Mheader call s:Mheader ()
 map <F1> :Mheader<CR>
 autocmd BufWritePre * call s:update ()
